@@ -44,7 +44,6 @@ func upperBound(nums []int, target int) int {
 	e := len(nums)
 
 	for s < e {
-
 		mid := (e-s)/2 + s
 		fmt.Println(s, " ", e, " ", mid)
 		if nums[mid] <= target {

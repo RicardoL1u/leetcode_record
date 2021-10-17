@@ -1,0 +1,34 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+using namespace std;
+
+#define loop(a,b,c) for(int a=b;a<c;a++)
+#define loop1(a,b,c) for(int a=b;a>c;a--)
+#define MAXN 10010
+int T,M;
+long long c[MAXN],v[MAXN];
+long long dp[10000010];
+int main(){
+    scanf("%d %d",&T,&M);
+    memset(c,0,sizeof(c));
+    memset(v,0,sizeof(v));
+    loop(i,0,M){
+        scanf("%d %d",&c[i],&v[i]);
+    }
+    memset(dp,0,sizeof(dp));
+    long long ans = 0;
+    loop(i,1,M+1){	
+        for(int j=0;j<=T;j++){
+            if(j-c[i-1]>=0){
+            	dp[j] = max(dp[j],dp[j-c[i-1]]+v[i-1]);
+//            	dp[j] = max(dp[1][j],dp[1][j-c[i-1]]+v[i-1]);
+//                dp[j] = max(dp[j],dp[j-c[i-1]]+v[i-1]);
+//                dp[i][j] = max(dp[j],dp[i-1][j]);
+            }
+            ans = max(ans,dp[j]);
+        }
+//        memcpy(dp[0],dp[1],sizeof(dp[0]));
+    }
+    cout << ans << endl;
+}
