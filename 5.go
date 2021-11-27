@@ -23,24 +23,27 @@ func longestPalindrome(s string) string {
 	}
 	for i := 1; i < len(s); i++ {
 		for offset := 1; i+offset < len(s) && i-offset >= 0; offset++ {
-			if s[i+offset] == s[i-offset] {
-				dp[i-offset][i+offset] =
-					dp[i-offset+1][i+offset-1] + 2
-				if dp[i-offset][i+offset] > maxLen {
-					ans = []byte(s[i-offset : i+offset+1])
-					maxLen = dp[i-offset][i+offset]
+			l, r := i-offset, i+offset
+			if s[r] == s[l] {
+				dp[l][r] = dp[l+1][r-1] + 2
+				if dp[l][r] > maxLen {
+					ans = []byte(s[l : r+1])
+					maxLen = dp[l][r]
 				}
+			} else {
+				break
 			}
 		}
 		for offset := 1; i+offset < len(s) && i-1-offset >= 0; offset++ {
 			r, l := i+offset, i-1-offset
 			if s[r] == s[l] && s[l+1] == s[r-1] {
-				dp[l][r] =
-					dp[l+1][r-1] + 2
+				dp[l][r] = dp[l+1][r-1] + 2
 				if dp[l][r] > maxLen {
 					ans = []byte(s[l : r+1])
 					maxLen = dp[l][r]
 				}
+			} else {
+				break
 			}
 		}
 	}
