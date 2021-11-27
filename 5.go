@@ -6,41 +6,28 @@ func longestPalindrome(s string) string {
 	if len(s) <= 1 {
 		return s
 	}
-	ans := make([]byte, len(s))
-	dp := make([][]int, len(s))
+	str, end := 0, 1
 	maxLen := 1
-	ans = []byte(s[0:1])
-	for i := 0; i < len(s); i++ {
-		dp[i] = make([]int, len(s))
-		dp[i][i] = 1
-		if i >= 1 && s[i] == s[i-1] {
-			dp[i-1][i] = 2
-			if dp[i-1][i] > maxLen {
-				ans = []byte(s[i-1 : i+1])
-				maxLen = dp[i-1][i]
-			}
-		}
-	}
+	// ans = []byte(s[:1])
+
 	for i := 1; i < len(s); i++ {
-		for offset := 1; i+offset < len(s) && i-offset >= 0; offset++ {
+		for offset := 0; i+offset < len(s) && i-offset >= 0; offset++ {
 			l, r := i-offset, i+offset
 			if s[r] == s[l] {
-				dp[l][r] = dp[l+1][r-1] + 2
-				if dp[l][r] > maxLen {
-					ans = []byte(s[l : r+1])
-					maxLen = dp[l][r]
+				if offset*2+1 > maxLen {
+					str, end = l, r+1
+					maxLen = offset*2 + 1
 				}
 			} else {
 				break
 			}
 		}
-		for offset := 1; i+offset < len(s) && i-1-offset >= 0; offset++ {
+		for offset := 0; i+offset < len(s) && i-1-offset >= 0; offset++ {
 			r, l := i+offset, i-1-offset
-			if s[r] == s[l] && s[l+1] == s[r-1] {
-				dp[l][r] = dp[l+1][r-1] + 2
-				if dp[l][r] > maxLen {
-					ans = []byte(s[l : r+1])
-					maxLen = dp[l][r]
+			if s[r] == s[l] {
+				if offset*2+2 > maxLen {
+					str, end = l, r+1
+					maxLen = offset*2 + 2
 				}
 			} else {
 				break
@@ -48,7 +35,7 @@ func longestPalindrome(s string) string {
 		}
 	}
 
-	return string(ans)
+	return s[str:end]
 }
 
 func max(a, b int) int {
