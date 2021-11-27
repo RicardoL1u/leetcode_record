@@ -8,7 +8,6 @@ func longestPalindrome(s string) string {
 	}
 	str, end := 0, 1
 	maxLen := 1
-	// ans = []byte(s[:1])
 
 	for i := 1; i < len(s); i++ {
 		for offset := 0; i+offset < len(s) && i-offset >= 0; offset++ {
