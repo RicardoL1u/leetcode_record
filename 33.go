@@ -51,31 +51,61 @@ func longestValidParentheses2(s string) int {
 	return ans
 }
 
-func longestValidParentheses(s string) int {
-	i, j, p, ans := 0, 0, 0, 0
-	stack := make([]byte, len(s))
-	for i < len(s) && j < len(s) && i <= j {
-		if s[j] == '(' {
-			stack[p] = '('
-			p++
-		} else {
-			if p == 0 {
-				j++
-				i = j
-				p = 0
-				continue
-			} else {
-				p--
+func longestValidParenthesesDPN(s string) int {
+	ans := 0
+	dp := make([]int, len(s)+1)
+	st := "a" + s
+	for i := 2; i <= len(s); i++ {
+		if st[i] == ')' && st[i-1] == '(' {
+			dp[i] = dp[i-2] + 2
+		} else if st[i] == ')' && st[i-1] == ')' {
+			if st[i-dp[i-1]-1] == '(' {
+				dp[i] = dp[i-1] + dp[i-dp[i-1]-2] + 2
 			}
 		}
-		if p == 0 {
-			ans = max(ans, j-i+1)
+		ans = max(dp[i], ans)
+	}
+	return ans
+}
+func longestValidParentheses(s string) int {
+	ans1 := getAns(s)
+	st := make([]byte, len(s))
+	for i := len(s) - 1; i >= 0; i-- {
+		st[len(s)-1-i] = byte(uint8(s[i]) ^ 0x1)
+	}
+	ans2 := getAns(string(st))
+	// fmt.Println(string(st), ans1, ans2)
+	return min(ans1, ans2)
+}
+
+func getAns(s string) int {
+	ans, cnt := 0, 0
+	l, r := 0, 0
+	for l < len(s) && r < len(s) {
+		if s[r] == '(' {
+			cnt++
+			r++
+		} else {
+			if cnt == 0 {
+				r++
+				l = r
+				continue
+			} else {
+				cnt--
+			}
+		}
+		if cnt == 0 {
+			ans = max(ans, r-l+1)
 		}
 	}
-	for i < len(s) {
-		if s[i] == '('{
-			i++
-			if p == i
+	for l < len(s) {
+		if s[l] == '(' {
+			cnt--
+			l++
+		}
+		if cnt == 0 {
+			ans = max(ans, r-l)
+			break
 		}
 	}
 	return ans
@@ -88,6 +118,16 @@ func max(a, b int) int {
 		return b
 	}
 }
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	} else {
+		return b
+	}
+
+}
+
 func main() {
 	// s := ")()())"
 	fmt.Println(longestValidParentheses("(()(((()"))
