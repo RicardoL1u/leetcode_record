@@ -11,37 +11,38 @@ func minDistance(word1 string, word2 string) int {
 	for i := 0; i < len(w1); i++ {
 		dp[i][0] = i
 	}
+	for i := 0; i < len(w2); i++ {
+		dp[0][i] = i
+	}
 	for j := 1; j < len(w2); j++ {
-		isMatched := false
-		for i := j; i < len(w1); i++ {
+		for i := 1; i < len(w1); i++ {
 			if w1[i] == w2[j] {
 				dp[i][j] = dp[i-1][j-1]
-				isMatched = true
-				if j == len(w2)-1 {
-					printMat(dp, len(w1))
-					return dp[i][j]
-				}
 			} else {
-				if isMatched {
-					dp[i][j] = dp[i-1][j] + 1 // delete
-					continue
-				}
 				dp[i][j] = dp[i-1][j-1] + 1 // replace
-				isMatched = true
-				if j == len(w2)-1 {
-					printMat(dp, len(w1))
-					return dp[i][j]
-				}
 			}
+			// anyway, we are always able to delete w1[i]
+			// to make the dp[i][j] matched
+			dp[i][j] = min(dp[i][j], dp[i-1][j]+1)
+			// same with above, we delete w2[j]
+			dp[i][j] = min(dp[i][j], dp[i][j-1]+1)
 		}
 	}
+	// printMat(dp, len(w1))
+	return dp[len(w1)-1][len(w2)-1]
+}
 
-	return 1
+func min(a, b int) int {
+	if a > b {
+		return b
+	} else {
+		return a
+	}
 }
 
 func printMat(mat [][]int, row int) {
 	for i := 0; i < row; i++ {
-		fmt.Println(mat[i])
+		fmt.Println(mat[row-i-1])
 	}
 }
 
