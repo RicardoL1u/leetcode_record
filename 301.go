@@ -33,7 +33,7 @@ func searchAns(s string, ch chan []string) {
 	strSet := make(map[string]bool)
 	cntl, cntr := cntTheUnmatched(s)
 	q := queue{e: make([]state, 0)}
-	q.Push(state{r: cntr, l: cntl, p: 0, ans: ""})
+	q.Push(state{r: cntr, l: cntl, p: 0, unmatchedL: 0, ans: ""})
 	for !q.IsEmpty() {
 		now := q.Pop()
 		if (now.l == now.r && now.l == 0) || now.p == len(s) {
@@ -54,14 +54,19 @@ func searchAns(s string, ch chan []string) {
 			if now.l > 0 {
 				q.Push(state{r: now.r, l: now.l - 1, p: now.p + 1, ans: now.ans})
 			}
-			q.Push(state{r: now.r, l: now.l, p: now.p + 1, ans: now.ans + "("})
+			q.Push(state{r: now.r, l: now.l, p: now.p + 1, unmatchedL: now.unmatchedL + 1, ans: now.ans + "("})
 		case ')':
 			if now.r > 0 {
 				q.Push(state{r: now.r - 1, l: now.l, p: now.p + 1, ans: now.ans})
 			}
-			q.Push(state{r: now.r, l: now.l, p: now.p + 1, ans: now.ans + ")"})
+			if now.unmatchedL > 0 {
+				q.Push(state{r: now.r, l: now.l, p: now.p + 1, unmatchedL: now.unmatchedL - 1, ans: now.ans + ")"})
+			}
+			if now.r == 0 && now.unmatchedL == 0 {
+				continue
+			}
 		default:
-			q.Push(state{r: now.r, l: now.l, p: now.p + 1, ans: now.ans + string(s[now.p])})
+			q.Push(state{r: now.r, l: now.l, p: now.p + 1, unmatchedL: now.unmatchedL, ans: now.ans + string(s[now.p])})
 		}
 
 	}
@@ -72,11 +77,18 @@ func searchAns(s string, ch chan []string) {
 }
 
 func removeInvalidParentheses(s string) []string {
+	ans := make([]string, 0)
 	ch1 := make(chan []string)
 	ch2 := make(chan []string)
 	go searchAns(s, ch1)
 	go searchAns(reversePar(s), ch2)
-
+	select {
+	case ans = <-ch1:
+		return ans
+	case ans = <-ch2:
+		return ans
+	}
+	return ans
 }
 
 func reversePar(s string) string {
