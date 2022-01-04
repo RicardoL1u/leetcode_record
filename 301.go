@@ -1,9 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type state struct {
-	r, l, p int
+	l, r, p, unmatchedL int
+	ans                 string
 }
 
 type queue struct {
@@ -25,12 +28,70 @@ func (p *queue) IsEmpty() bool {
 	return len(p.e) == 0
 }
 
-func removeInvalidParentheses(s string) []string {
+func searchAns(s string, ch chan []string) {
 	ans := make([]string, 0)
-	// cntr, cntl := cntTheUnmatched(s)
+	strSet := make(map[string]bool)
+	cntl, cntr := cntTheUnmatched(s)
+	q := queue{e: make([]state, 0)}
+	q.Push(state{r: cntr, l: cntl, p: 0, ans: ""})
+	for !q.IsEmpty() {
+		now := q.Pop()
+		if (now.l == now.r && now.l == 0) || now.p == len(s) {
+			// fmt.Println(now)
+			temp := now.ans
+			if now.p < len(s) {
+				temp = temp + s[now.p:]
+			}
+			tr, tl := cntTheUnmatched(temp)
+			if tr == 0 && tl == 0 {
+				strSet[temp] = true
+			}
+			continue
+		}
+		// next := now
+		switch s[now.p] {
+		case '(':
+			if now.l > 0 {
+				q.Push(state{r: now.r, l: now.l - 1, p: now.p + 1, ans: now.ans})
+			}
+			q.Push(state{r: now.r, l: now.l, p: now.p + 1, ans: now.ans + "("})
+		case ')':
+			if now.r > 0 {
+				q.Push(state{r: now.r - 1, l: now.l, p: now.p + 1, ans: now.ans})
+			}
+			q.Push(state{r: now.r, l: now.l, p: now.p + 1, ans: now.ans + ")"})
+		default:
+			q.Push(state{r: now.r, l: now.l, p: now.p + 1, ans: now.ans + string(s[now.p])})
+		}
 
+	}
+	for k, _ := range strSet {
+		ans = append(ans, k)
+	}
+	ch <- ans
+}
+
+func removeInvalidParentheses(s string) []string {
+	ch1 := make(chan []string)
+	ch2 := make(chan []string)
+	go searchAns(s, ch1)
+	go searchAns(reversePar(s), ch2)
+
+}
+
+func reversePar(s string) string {
+	ans := ""
+	for i := len(s) - 1; i >= 0; i-- {
+		switch s[i] {
+		case '(':
+			ans = ans + ")"
+		case ')':
+			ans = ans + "("
+		default:
+			ans = ans + string(s[i])
+		}
+	}
 	return ans
-
 }
 
 func cntTheUnmatched(s string) (int, int) {
@@ -38,7 +99,7 @@ func cntTheUnmatched(s string) (int, int) {
 	for i := 0; i < len(s); i++ {
 		if s[i] == '(' {
 			l++
-		} else {
+		} else if s[i] == ')' {
 			if l > 0 {
 				l--
 			} else {
@@ -50,11 +111,13 @@ func cntTheUnmatched(s string) (int, int) {
 }
 
 func main() {
-	s := "()())()"
-	fmt.Println(removeInvalidParentheses(s))
-	testQueue := queue{e: make([]state, 0)}
-	testQueue.Push(state{l: 0, r: 0, p: 12})
-	fmt.Println(testQueue.IsEmpty())
-	fmt.Println(testQueue.Pop())
-	fmt.Println(testQueue.IsEmpty())
+	// s := "(a)())()"
+	// s := ")("
+	// fmt.Println(cntTheUnmatched(s))
+	fmt.Println(removeInvalidParentheses("(a)())()"))
+	fmt.Println(removeInvalidParentheses(")s(asd)"))
+	fmt.Println(removeInvalidParentheses("a"))
+	fmt.Println(removeInvalidParentheses("("))
+	fmt.Println(removeInvalidParentheses("(a)())((((()"))
+
 }
