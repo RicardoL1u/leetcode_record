@@ -20,7 +20,7 @@ func searchRange(nums []int, target int) []int {
 	return res
 }
 
-var cnt int = 0
+// var cnt int = 0
 
 func lowerBound(nums []int, target int) int {
 	s := 0
@@ -59,8 +59,11 @@ func upperBound(nums []int, target int) int {
 	return s - 1
 }
 
+/*
 func main() {
 	nums := []int{0, 1, 1, 2, 2, 3, 3}
 	fmt.Println(upperBound(nums, 0))
 	fmt.Println(searchRange(nums, 0))
 }
+
+*/

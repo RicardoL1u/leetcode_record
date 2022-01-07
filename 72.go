@@ -32,13 +32,13 @@ func minDistance(word1 string, word2 string) int {
 	return dp[len(w1)-1][len(w2)-1]
 }
 
-func min(a, b int) int {
-	if a > b {
-		return b
-	} else {
-		return a
-	}
-}
+// func min(a, b int) int {
+// 	if a > b {
+// 		return b
+// 	} else {
+// 		return a
+// 	}
+// }
 
 func printMat(mat [][]int, row int) {
 	for i := 0; i < row; i++ {
@@ -46,6 +46,9 @@ func printMat(mat [][]int, row int) {
 	}
 }
 
+/*
 func main() {
 	fmt.Println(minDistance("horse", "rose"))
 }
+
+*/

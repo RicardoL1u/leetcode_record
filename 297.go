@@ -78,6 +78,7 @@ func (this *Codec) formTree(node []string, ptr *int) *TreeNode {
  * ans := deser.deserialize(data);
  */
 
+/*
 func main() {
 	testStr := "1,2,3,null,null,4,5"
 	ser := Constructor()
@@ -100,3 +101,5 @@ func main() {
 	fmt.Println(ser.serialize(&testRoot))
 	fmt.Println(ser.serialize(root))
 }
+
+*/

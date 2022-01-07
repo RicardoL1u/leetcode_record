@@ -42,6 +42,7 @@ func testIntSlice(test []int) {
 
 }
 
+/*
 func main() {
 	test := []int{
 		1, 2, 3, 4,
@@ -52,3 +53,5 @@ func main() {
 	fmt.Println(test)
 	// fmt.Println(letterCombinations(""))
 }
+
+*/

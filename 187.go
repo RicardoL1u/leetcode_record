@@ -1,9 +1,5 @@
 package main
 
-import (
-	"fmt"
-)
-
 func findRepeatedDnaSequences(s string) (ans []string) {
 	bitmap := map[byte]uint32{
 		'A': 0,
@@ -47,6 +43,7 @@ func findRepeatedDnaSequences(s string) (ans []string) {
 	return
 }
 
+/*
 func main() {
 	test := "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT"
 	// test := "AAAAAAAAAAA"
@@ -54,3 +51,5 @@ func main() {
 	fmt.Print(findRepeatedDnaSequences(test))
 
 }
+
+*/

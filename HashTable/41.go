@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 func firstMissingPositive(nums []int) int {
 	n := len(nums)
 	for k := range nums {
@@ -44,6 +42,8 @@ func absInt(v int) int {
 		return v
 	}
 }
+
+/*
 func main() {
 	// nums := []int{1, 2, 3, 5}
 	nums := []int{1, 2, 0}
@@ -53,3 +53,5 @@ func main() {
 	fmt.Println(firstMissingPositive(nums1))
 	fmt.Println(firstMissingPositive(nums2))
 }
+
+*/

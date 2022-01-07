@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 func generateParenthesis(n int) []string {
 	ret := make([]string, 0)
 	implStack(n, 0, "", &ret)
@@ -23,8 +21,11 @@ func implStack(out, in int, temp string, result *[]string) {
 
 }
 
+/*
 func main() {
 	fmt.Println(generateParenthesis(0))
 	fmt.Println(generateParenthesis(1))
 	fmt.Println(generateParenthesis(3))
 }
+
+*/

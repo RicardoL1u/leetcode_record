@@ -106,6 +106,8 @@ func getAns(s string, t string) ([]int, []int) {
 	}
 	return str, end
 }
+
+/*
 func main() {
 	s := "ADOBECODEBABC"
 	t := "ABC"
@@ -115,3 +117,5 @@ func main() {
 	fmt.Println(minWindow("cabwefgewcwaefgcf", "cae"))
 
 }
+
+*/

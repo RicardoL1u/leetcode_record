@@ -1,9 +1,5 @@
 package main
 
-import (
-	"fmt"
-)
-
 func searchMatrix(matrix [][]int, target int) bool {
 	// sr, sc := 0, 0
 	er := len(matrix)
@@ -21,8 +17,6 @@ func searchMatrix(matrix [][]int, target int) bool {
 // var cnt int = 0
 
 func binarySearch(nums []int, s, target int) bool {
-	// cnt := 0
-	// s := 0
 	e := len(nums)
 
 	for s < e {
@@ -52,6 +46,7 @@ func copyCol(mat [][]int, col int) []int {
 
 // func binarySearch()
 
+/*
 func main() {
 	// mat := [][]int{{1, 4, 7, 11, 15}, {2, 5, 8, 12, 19}, {3, 6, 9, 16, 22}, {10, 13, 14, 17, 24}, {18, 21, 23, 26, 30}}
 	// mat := [][]int{{1, 4, 7, 11, 15}}
@@ -65,3 +60,5 @@ func main() {
 	// fmt.Println(searchMatrix(mat, 4))
 	fmt.Println(searchMatrix(mat, 27))
 }
+
+*/

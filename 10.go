@@ -102,6 +102,7 @@ func getOpArr(p string) (opArr []op) {
 	return
 }
 
+/*
 func main() {
 
 	// strings.SplitAfter()
@@ -115,3 +116,5 @@ func main() {
 	// fmt.Printf("Test 6 %v\n", true == isMatchSpc("aab", "c*a*b"))
 	// fmt.Printf("Test 7 %v\n", true == isMatchSpc("a", "ab*"))
 }
+
+*/

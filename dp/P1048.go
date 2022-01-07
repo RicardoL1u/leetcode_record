@@ -1,11 +1,8 @@
-package main
+package dp
 
-import (
-	"fmt"
-)
+// const MAX = 1010
 
-const MAX = 1010
-
+/*
 func max(a, b int) int {
 	if a > b {
 		return a
@@ -14,6 +11,7 @@ func max(a, b int) int {
 	}
 }
 
+/*
 func main() {
 	T, M := 0, 0
 	fmt.Scanf("%d %d", &T, &M)
@@ -38,3 +36,5 @@ func main() {
 	fmt.Println(dp[M][T])
 
 }
+
+*/

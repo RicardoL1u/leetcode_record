@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 // func getK(int []nums) int {
 // 	n := len(nums)
 // 	findK(nums, 0, n)
@@ -33,6 +31,7 @@ func QuickSort(nums []int, s, e int) {
 	QuickSort(nums, i+1, e)
 }
 
+/*
 func main() {
 	nums := []int{1, 0, 2, 5, 8, 3, 4, 6, 7, 9}
 	// test := make(map[string]string, 0)
@@ -47,3 +46,5 @@ func main() {
 	QuickSort(nums, 0, len(nums)-1)
 	fmt.Println(nums)
 }
+
+*/

@@ -1,7 +1,6 @@
 package main
 
-import "fmt"
-
+/*
 func main() {
 	// 判断map中元素是否存在
 	// 兼容0
@@ -14,3 +13,5 @@ func main() {
 		}
 	}
 }
+
+*/

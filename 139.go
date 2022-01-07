@@ -38,6 +38,10 @@ func wordBreak(s string, wordDict []string) bool {
 	fmt.Println(dp)
 	return dp[len(w)-1]
 }
+
+/*
 func main() {
 	fmt.Println(wordBreak("leetcode", []string{"leet", "code"}))
 }
+
+*/

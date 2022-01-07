@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 func longestPalindrome(s string) string {
 	if len(s) <= 1 {
 		return s
@@ -37,6 +35,7 @@ func longestPalindrome(s string) string {
 	return s[str:end]
 }
 
+/*
 func max(a, b int) int {
 	if a > b {
 		return a
@@ -44,6 +43,7 @@ func max(a, b int) int {
 	return b
 }
 
+/*
 func main() {
 	// s := "accbddb"
 	// s := "ac"
@@ -51,3 +51,5 @@ func main() {
 	fmt.Printf("%s\n", longestPalindrome(s))
 
 }
+
+*/

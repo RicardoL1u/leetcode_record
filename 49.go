@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"sort"
 )
 
@@ -30,7 +29,11 @@ func groupAnagrams(strs []string) [][]string {
 	}
 	return ans
 }
+
+/*
 func main() {
 	str := []string{"eat", "tea", "tan", "ate", "nat", "bat"}
 	fmt.Println(groupAnagrams(str))
 }
+
+*/

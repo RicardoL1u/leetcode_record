@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 func longestValidParentheses1(s string) int {
 	dp := make([][]int, len(s)+2)
 	for k := range dp {
@@ -111,6 +109,7 @@ func getAns(s string) int {
 	return ans
 }
 
+/*
 func max(a, b int) int {
 	if a > b {
 		return a
@@ -143,3 +142,5 @@ func main() {
 	fmt.Println(longestValidParentheses(")))))((((((())))"))
 	fmt.Println(longestValidParentheses("()") == 2)
 }
+
+*/

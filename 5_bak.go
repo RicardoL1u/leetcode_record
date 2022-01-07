@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func longestPalindrome(s string) string {
+func longestPalindromebak(s string) string {
 	if len(s) <= 1 {
 		return s
 	}
@@ -76,13 +76,14 @@ func longestPalindrome1(s string) string {
 	return string(ans)
 }
 
-func max(a, b int) int {
-	if a > b {
-		return a
-	} else {
-		return b
-	}
-}
+// /*
+// func max(a, b int) int {
+// 	if a > b {
+// 		return a
+// 	} else {
+// 		return b
+// 	}
+// }
 
 func isRep(p1, p2 int, s string) bool {
 	for p1 <= p2 {
@@ -94,6 +95,8 @@ func isRep(p1, p2 int, s string) bool {
 	}
 	return true
 }
+
+/*
 func main() {
 	// s := "ba"
 	// s := "accccba"
@@ -101,3 +104,5 @@ func main() {
 	fmt.Printf("%s\n", longestPalindrome(s))
 	// fmt.Print(isRep(0, len(s)-1, s))
 }
+
+*/

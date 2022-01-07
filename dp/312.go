@@ -1,6 +1,4 @@
-package main
-
-import "fmt"
+package dp
 
 func maxCoins(nums []int) [][]int {
 	n := len(nums)
@@ -26,6 +24,7 @@ func maxCoins(nums []int) [][]int {
 	return dp
 }
 
+/*
 func max(a, b int) int {
 	if a > b {
 		return a
@@ -33,6 +32,8 @@ func max(a, b int) int {
 		return b
 	}
 }
+
+/*
 func main() {
 	nums := []int{3, 1, 5, 8}
 	dp := maxCoins(nums)
@@ -44,3 +45,5 @@ func main() {
 		fmt.Println()
 	}
 }
+
+*/

@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 type Trie struct {
 	root treeNode
 }
@@ -12,9 +10,9 @@ type treeNode struct {
 	isEnd   bool
 }
 
-func Constructor() Trie {
-	return Trie{root: treeNode{' ', make(map[byte]*treeNode), false}}
-}
+// func Constructor() Trie {
+// 	return Trie{root: treeNode{' ', make(map[byte]*treeNode), false}}
+// }
 
 func (this *Trie) Insert(word string) {
 	now := &this.root //now 这里是上级节点
@@ -79,6 +77,7 @@ func (this *Trie) StartsWith(prefix string) bool {
  * param_3 := obj.StartsWith(prefix);
  */
 
+/*
 func main() {
 	trie := Constructor()
 	trie.Insert("apple")
@@ -91,3 +90,5 @@ func main() {
 	fmt.Println(trie.Search("app")) // return True
 
 }
+
+*/
