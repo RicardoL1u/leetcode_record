@@ -3,12 +3,46 @@ package binarysearch
 import (
 	"fmt"
 	"log"
+	"math/rand"
 	"sort"
 	"testing"
 )
 
 func majorityElement(nums []int) int {
-	return 0
+	suffledData := make([]int, len(nums))
+	perm := rand.Perm(len(nums)) // if some one say quick is not stable
+	// show this and fuck off
+	for i, v := range perm {
+		suffledData[v] = nums[i]
+	}
+	p := findK(&suffledData, 0, len(nums), len(nums)/2)
+	return p
+}
+
+func findK(nums *[]int, s, e, k int) int { // 我这里的k就是从大到小排序后的下标
+	i, j := s, e-1
+	p := (*nums)[s]
+	for i != j {
+		for i < j && (*nums)[j] >= p {
+			j--
+		}
+		(*nums)[i] = (*nums)[j]
+		for i < j && (*nums)[i] < p {
+			i++
+		}
+		(*nums)[j] = (*nums)[i]
+	}
+	(*nums)[i] = p
+	if k == i {
+		return p
+	} else if k > i {
+		return findK(nums, i+1, e, k)
+	} else {
+		return findK(nums, s, i, k)
+	}
+}
+
+func TestMajority(t *testing.T) {
 }
 
 func QuickSort(nums *[]int, s, e int) {
