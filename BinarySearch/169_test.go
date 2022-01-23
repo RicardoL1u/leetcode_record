@@ -86,6 +86,7 @@ func main() {
 	for i := 1; i < num; i++ {
 		fmt.Print(" %d", data[i])
 	}
+	copy()
 	// return
 }
 

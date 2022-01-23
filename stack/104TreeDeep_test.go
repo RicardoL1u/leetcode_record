@@ -1,31 +1,31 @@
-package tree
+package stack
 
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
+// type TreeNode struct {
+// 	Val   int
+// 	Left  *TreeNode
+// 	Right *TreeNode
+// }
 
-type stack struct {
+type stackTree struct {
 	data []*TreeNode
 }
 
-func (s *stack) Push(node *TreeNode) {
+func (s *stackTree) Push(node *TreeNode) {
 	s.data = append(s.data, node)
 }
-func (s *stack) Pop() *TreeNode {
+func (s *stackTree) Pop() *TreeNode {
 	ans := s.data[len(s.data)-1]
 	s.data = s.data[:len(s.data)-1]
 	return ans
 }
-func (s *stack) IsEmpty() bool {
+func (s *stackTree) IsEmpty() bool {
 	return len(s.data) == 0
 }
 
 func maxDepth(root *TreeNode) int {
 	ans := 0
 	nowDeep := 0
-	s := stack{data: make([]*TreeNode, 0)}
+	s := stackTree{data: make([]*TreeNode, 0)}
 	for root != nil || !s.IsEmpty() {
 		for root != nil {
 			nowDeep++
